@@ -3,218 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investigator Will Generator!</title>
+    <title>Modern Styled Page</title>
     <style>
+        /* Reset margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Segoe UI, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
             text-align: center;
-            margin-top: 80px;
         }
-        .button {
-            padding: 10px 20px;
-            background-color: #000000;
+
+        /* Style the header with a blurry background */
+        header {
+            position: relative;
+            height: 350px;
+            background-image: url('https://static.wikia.nocookie.net/bloxston-mystery/images/5/57/Thumbnail1.png/revision/latest?cb=20230506123846');
+            background-size: cover;
+            background-position: top;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Blurry effect on the background */
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            filter: blur(10px) brightness(0.8);
+            z-index: 0;
+        }
+
+        /* Title image (logo), larger without shadow or hover effects */
+        .title-image {
+            position: relative;
+            z-index: 1;
+            width: 550px; /* Increased size */
+        }
+
+        /* Style the button container */
+        .button-container {
+            margin-top: 20px;
+        }
+
+        /* Style the text above the buttons */
+        .button-text {
+            font-size: 24px;
+            margin-top: 40px; /* Added more space between header and text */
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        /* Style the buttons */
+        button {
+            background-color: #007BFF;
             color: white;
-            border: outset;
-            cursor: pointer;
+            padding: 15px 40px;
+            text-align: center;
             font-size: 16px;
-            border-radius: 10px; /* Rounded corners */
+            margin: 10px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+            transition: all 0.3s ease;
         }
-        .button:hover {
-            background-color: #f8f7fa;
-            color: black;
+
+        button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+            transform: translateY(-2px);
         }
-        #result {
-            margin-top: 20px;
-            font-size: 40px;
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 8px rgba(0, 123, 255, 0.4);
         }
-        #selected-role {
-            margin-top: 20px;
-            font-size: 20px;
-            color: blue;
+
+        /* Add some padding for the bottom section */
+        .button-container {
+            padding-bottom: 40px;
         }
     </style>
 </head>
 <body>
-    <h1>Investigator Will Generator</h1>
-    <p>Made with ChatGPT 4.0</p>
 
-    <label for="player-number">Select player number:</label>
-    <select id="player-number">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15" selected>15</option>
-    </select>
+    <!-- Header with blurry background image -->
+    <header>
+        <img src="https://static.wikia.nocookie.net/bloxston-mystery/images/e/e6/Site-logo.png/revision/latest?cb=20220619233236" alt="Title Image" class="title-image">
+    </header>
 
-    <div id="selections">
-        <h2>Replace One Role</h2>
-        
-        <label for="combined-roles">Select Role:</label>
-        <select id="combined-roles" onchange="displaySelectedRole()">
-            <option value="">Select a role</option>
-            <option value="Bounty Hunter">Bounty Hunter</option>
-            <option value="Investigator">Investigator</option>
-            <option value="Lookout">Lookout</option>
-            <option value="Psychic">Psychic</option>
-            <option value="Sheriff">Sheriff</option>
-            <option value="Spy">Spy (HOME ROLE)</option>
-            <option value="Bodyguard">Bodyguard</option>
-            <option value="Disruptor">Disruptor (HOME ROLE)</option>
-            <option value="Doctor">Doctor</option>
-            <option value="Trapper">Trapper (HOME ROLE)</option>
-            <option value="Enforcer">Enforcer</option>
-            <option value="Jailor">Jailor (HOME ROLE)</option>
-            <option value="Liberator">Liberator</option>
-            <option value="Veteran">Veteran (HOME ROLE)</option>
-            <option value="Vigilante">Vigilante</option>
-            <option value="Distractor">Distractor (HOME ROLE)</option>
-            <option value="Executive">Executive (HOME ROLE)</option>
-            <option value="Medium">Medium (HOME ROLE)</option>
-            <option value="Retributionist">Retributionist (HOME ROLE)</option>
-            <option value="Therapist">Therapist (HOME ROLE)</option>
-            <option value="Blackmailer">Blackmailer (HOME ROLE)</option>
-            <option value="Forger">Forger (HOME ROLE)</option>
-            <option value="Janitor">Janitor (HOME ROLE)</option>
-            <option value="Ambusher">Ambusher</option>
-            <option value="Godfather">Godfather</option>
-            <option value="Assassin">Assassin</option>
-            <option value="Mafioso">Mafioso</option>
-            <option value="Toxicologist">Toxicologist</option>
-            <option value="Consigliere">Consigliere</option>
-            <option value="Extortionist">Extortionist (HOME ROLE)</option>
-            <option value="Magician">Magician</option>
-            <option value="Medusa">Medusa</option>
-            <option value="Poisoner">Poisoner</option>
-            <option value="Enchantress">Enchantress</option>
-            <option value="Necromancer">Necromancer</option>
-            <option value="Potion Master">Potion Master</option>
-            <option value="Puppeteer">Puppeteer (HOME ROLE)</option>
-            <option value="Witch">Witch</option>
-            <option value="Amnesiac">Amnesiac (HOME ROLE)</option>
-            <option value="Executioner">Executioner</option>
-            <option value="Guardian Angel">Guardian Angel</option>
-            <option value="Jester">Jester</option>
-            <option value="Survivor">Survivor (HOME ROLE)</option>
-            <option value="Arsonist">Arsonist</option>
-            <option value="Crusader">Crusader</option>
-            <option value="Juggernaut">Juggernaut</option>
-            <option value="Outlaw">Outlaw</option>
-            <option value="Serial Killer">Serial Killer</option>
-            <option value="Vampire">Vampire</option>
-            <option value="Werewolf">Werewolf</option>
-            <option value="Fugitive">Fugitive</option>
-            <option value="Hitman">Hitman</option>
-            <option value="Plaguebearer">Plaguebearer</option>
-            <option value="Pirate">Pirate (HOME ROLE)</option>
-        </select>
-
-        <button class="button" onclick="replaceRole()">Add Selected Role</button>
+    <!-- Text above buttons -->
+    <div class="button-text">
+        Choose your option below.
     </div>
 
-    <button class="button" onclick="generateRole()">Generate Will</button>
+    <!-- Button section -->
+    <div class="button-container">
+        <button onclick="window.location.href='https://macman99.github.io/BloxstonToolz/InvestigatorGenerator/'">Investigator Will Generator</button>
+    </div>
 
-    <div id="result"></div>
-    <div id="selected-role"></div>
-
-    <script>
-        const homeRoles = [
-            "Disruptor", "Trapper", "Jailor", "Veteran", 
-            "Distractor", "Executive", "Medium", 
-            "Retributionist", "Therapist", "Blackmailer", 
-            "Forger", "Janitor", "Extortionist", "Puppeteer", 
-            "Amnesiac", "Survivor", "Pirate"
-        ];
-
-        const townRoles = [
-            "Bounty Hunter", "Investigator", "Lookout", 
-            "Psychic", "Sheriff", "Spy", "Bodyguard", 
-            "Enforcer", "Liberator", "Vigilante"
-        ];
-        
-        const evilRoles = ["Ambusher", "Godfather", "Assassin", "Mafioso", "Toxicologist", "Consigliere"];
-        const covenRoles = ["Magician", "Medusa", "Poisoner", "Enchantress", "Necromancer", "Potion Master", "Witch"];
-        const neutralBenign = ["Amnesiac", "Guardian Angel", "Jester", "Survivor"];
-        const neutralKilling = ["Arsonist", "Crusader", "Juggernaut", "Outlaw", "Serial Killer", "Vampire", "Werewolf"];
-        const neutralChaos = ["Fugitive", "Hitman", "Plaguebearer", "Pirate"];
-        
-        const allRoles = [...townRoles, ...evilRoles, ...covenRoles, ...neutralBenign, ...neutralKilling, ...neutralChaos, ...homeRoles];
-
-        let generatedRoles = []; // Store generated roles
-        let selectedRole = null; // Track the selected role
-
-        // Function to check if the selected role is a home role
-        function isHomeRole(role) {
-            return homeRoles.includes(role);
-        }
-
-        // Function to generate 4 random roles based on selection rules
-        function generateRandomRoles() {
-            let selectedRoles = [];
-            let availableRoles = [...allRoles];
-
-            // Ensure at least 2 Town roles are included
-            while (selectedRoles.length < 2) {
-                let randomIndex = Math.floor(Math.random() * townRoles.length);
-                const chosenRole = townRoles[randomIndex];
-                if (!selectedRoles.includes(chosenRole)) {
-                    selectedRoles.push(chosenRole);
-                }
-            }
-
-            // Generate 2 additional random roles
-            while (selectedRoles.length < 4) {
-                let randomIndex = Math.floor(Math.random() * availableRoles.length);
-                const chosenRole = availableRoles[randomIndex];
-                if (!selectedRoles.includes(chosenRole)) {
-                    selectedRoles.push(chosenRole);
-                    availableRoles.splice(randomIndex, 1); // Remove chosen role to avoid duplicates
-                }
-            }
-
-            // Randomly determine where to place the selected role
-            if (selectedRole) {
-                const replaceIndex = Math.floor(Math.random() * 4);
-                selectedRoles[replaceIndex] = selectedRole;
-            }
-
-            return selectedRoles;
-        }
-
-        // Function to replace the selected role
-        function replaceRole() {
-            selectedRole = document.getElementById("combined-roles").value;
-            displaySelectedRole();
-        }
-
-        // Function to display the selected role
-        function displaySelectedRole() {
-            const selected = document.getElementById("combined-roles").value;
-            document.getElementById("selected-role").innerText = `Selected Role: ${selected}`;
-        }
-
-        // Function to generate roles and update the result
-        function generateRole() {
-            const playerNumber = document.getElementById("player-number").value;
-            generatedRoles = generateRandomRoles();
-
-            // Check if selected role is home or not
-            const roleType = isHomeRole(selectedRole) ? "(Home)" : "(Not Home)";
-            const formattedRoles = generatedRoles.join(", ");
-
-            // Output the result
-            document.getElementById("result").innerText = `${playerNumber} ${roleType} is ${formattedRoles}!`;
-        }
-    </script>
 </body>
 </html>

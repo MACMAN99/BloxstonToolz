@@ -6,126 +6,208 @@
     <title>Investigator Will Generator!</title>
     <style>
         body {
-            font-family: Segoe UI, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background: url('https://i.ibb.co/9qrpqQ1/Screenshot-2024-09-21-184633.png') no-repeat center center fixed; 
+            background-size: cover;
+        }
+        .blur-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            filter: blur(5px);
+            z-index: 0;
+        }
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 1;
+            max-width: 700px;
             text-align: center;
-            margin-top: 80px;
+            overflow: hidden;
+        }
+        img.logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 200px; /* Increased size */
+            z-index: 2;
+            cursor: pointer; /* Added pointer for click indication */
+        }
+        h1 {
+            color: #333;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         .button {
             padding: 10px 20px;
-            background-color: #000000;
+            background-color: #007BFF;
             color: white;
-            border: outset;
+            border: none;
+            border-radius: 25px;
             cursor: pointer;
             font-size: 16px;
-            border-radius: 10px; /* Rounded corners */
+            transition: background-color 0.3s, transform 0.2s;
+            margin: 10px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
         .button:hover {
-            background-color: #f8f7fa;
-            color: black;
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .button:active {
+            transform: scale(0.95);
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+            font-weight: bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        label {
+            font-size: 18px;
+            color: #555;
+            font-weight: bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         #result {
             margin-top: 20px;
-            font-size: 40px;
+            font-size: 24px;
+            color: #333;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         #selected-role {
             margin-top: 20px;
             font-size: 20px;
             color: blue;
+            font-weight: bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
     </style>
 </head>
 <body>
-    <h1>Investigator Will Generator</h1>
-    <p>Made with ChatGPT 4.0</p>
+    <div class="blur-background"></div>
+    <img src="https://static.wikia.nocookie.net/bloxston-mystery/images/e/e6/Site-logo.png/revision/latest?cb=20220619233236" alt="Logo" class="logo" onclick="window.location.href='https://macman99.github.io/BloxstonToolz'">
+    
+    <div class="content">
+        <h1>Investigator Will Generator</h1>
+        <p>Made with ChatGPT 4.0</p>
 
-    <label for="player-number">Select player number:</label>
-    <select id="player-number">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15" selected>15</option>
-    </select>
-
-    <div id="selections">
-        <h2>Replace One Role</h2>
-        
-        <label for="combined-roles">Select Role:</label>
-        <select id="combined-roles" onchange="displaySelectedRole()">
-            <option value="">Select a role</option>
-            <option value="Bounty Hunter">Bounty Hunter</option>
-            <option value="Investigator">Investigator</option>
-            <option value="Lookout">Lookout</option>
-            <option value="Psychic">Psychic</option>
-            <option value="Sheriff">Sheriff</option>
-            <option value="Spy">Spy (HOME ROLE)</option>
-            <option value="Bodyguard">Bodyguard</option>
-            <option value="Disruptor">Disruptor (HOME ROLE)</option>
-            <option value="Doctor">Doctor</option>
-            <option value="Trapper">Trapper (HOME ROLE)</option>
-            <option value="Enforcer">Enforcer</option>
-            <option value="Jailor">Jailor (HOME ROLE)</option>
-            <option value="Liberator">Liberator</option>
-            <option value="Veteran">Veteran (HOME ROLE)</option>
-            <option value="Vigilante">Vigilante</option>
-            <option value="Distractor">Distractor (HOME ROLE)</option>
-            <option value="Executive">Executive (HOME ROLE)</option>
-            <option value="Medium">Medium (HOME ROLE)</option>
-            <option value="Retributionist">Retributionist (HOME ROLE)</option>
-            <option value="Therapist">Therapist (HOME ROLE)</option>
-            <option value="Blackmailer">Blackmailer (HOME ROLE)</option>
-            <option value="Forger">Forger (HOME ROLE)</option>
-            <option value="Janitor">Janitor (HOME ROLE)</option>
-            <option value="Ambusher">Ambusher</option>
-            <option value="Godfather">Godfather</option>
-            <option value="Assassin">Assassin</option>
-            <option value="Mafioso">Mafioso</option>
-            <option value="Toxicologist">Toxicologist</option>
-            <option value="Consigliere">Consigliere</option>
-            <option value="Extortionist">Extortionist (HOME ROLE)</option>
-            <option value="Magician">Magician</option>
-            <option value="Medusa">Medusa</option>
-            <option value="Poisoner">Poisoner</option>
-            <option value="Enchantress">Enchantress</option>
-            <option value="Necromancer">Necromancer</option>
-            <option value="Potion Master">Potion Master</option>
-            <option value="Puppeteer">Puppeteer (HOME ROLE)</option>
-            <option value="Witch">Witch</option>
-            <option value="Amnesiac">Amnesiac (HOME ROLE)</option>
-            <option value="Executioner">Executioner</option>
-            <option value="Guardian Angel">Guardian Angel</option>
-            <option value="Jester">Jester</option>
-            <option value="Survivor">Survivor (HOME ROLE)</option>
-            <option value="Arsonist">Arsonist</option>
-            <option value="Crusader">Crusader</option>
-            <option value="Juggernaut">Juggernaut</option>
-            <option value="Outlaw">Outlaw</option>
-            <option value="Serial Killer">Serial Killer</option>
-            <option value="Vampire">Vampire</option>
-            <option value="Werewolf">Werewolf</option>
-            <option value="Fugitive">Fugitive</option>
-            <option value="Hitman">Hitman</option>
-            <option value="Plaguebearer">Plaguebearer</option>
-            <option value="Pirate">Pirate (HOME ROLE)</option>
+        <label for="player-number">Select player number:</label>
+        <select id="player-number">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15" selected>15</option>
         </select>
 
-        <button class="button" onclick="replaceRole()">Add Selected Role</button>
+        <div id="selections">
+            <h2>Replace One Role</h2>
+            
+            <label for="combined-roles">Select Role:</label>
+            <select id="combined-roles" onchange="displaySelectedRole()">
+                <option value="">Select a role</option>
+                <option value="Bounty Hunter">Bounty Hunter</option>
+                <option value="Investigator">Investigator</option>
+                <option value="Lookout">Lookout</option>
+                <option value="Psychic">Psychic</option>
+                <option value="Sheriff">Sheriff</option>
+                <option value="Spy">Spy (HOME ROLE)</option>
+                <option value="Bodyguard">Bodyguard</option>
+                <option value="Disruptor">Disruptor (HOME ROLE)</option>
+                <option value="Doctor">Doctor</option>
+                <option value="Trapper">Trapper (HOME ROLE)</option>
+                <option value="Enforcer">Enforcer</option>
+                <option value="Jailor">Jailor (HOME ROLE)</option>
+                <option value="Liberator">Liberator</option>
+                <option value="Veteran">Veteran (HOME ROLE)</option>
+                <option value="Vigilante">Vigilante</option>
+                <option value="Distractor">Distractor (HOME ROLE)</option>
+                <option value="Executive">Executive (HOME ROLE)</option>
+                <option value="Medium">Medium (HOME ROLE)</option>
+                <option value="Retributionist">Retributionist (HOME ROLE)</option>
+                <option value="Therapist">Therapist (HOME ROLE)</option>
+                <option value="Blackmailer">Blackmailer (HOME ROLE)</option>
+                <option value="Forger">Forger (HOME ROLE)</option>
+                <option value="Janitor">Janitor (HOME ROLE)</option>
+                <option value="Ambusher">Ambusher</option>
+                <option value="Godfather">Godfather</option>
+                <option value="Assassin">Assassin</option>
+                <option value="Mafioso">Mafioso</option>
+                <option value="Toxicologist">Toxicologist</option>
+                <option value="Consigliere">Consigliere</option>
+                <option value="Extortionist">Extortionist (HOME ROLE)</option>
+                <option value="Magician">Magician</option>
+                <option value="Medusa">Medusa</option>
+                <option value="Poisoner">Poisoner</option>
+                <option value="Enchantress">Enchantress</option>
+                <option value="Necromancer">Necromancer</option>
+                <option value="Potion Master">Potion Master</option>
+                <option value="Puppeteer">Puppeteer (HOME ROLE)</option>
+                <option value="Witch">Witch</option>
+                <option value="Amnesiac">Amnesiac (HOME ROLE)</option>
+                <option value="Executioner">Executioner</option>
+                <option value="Guardian Angel">Guardian Angel</option>
+                <option value="Jester">Jester</option>
+                <option value="Survivor">Survivor (HOME ROLE)</option>
+                <option value="Arsonist">Arsonist</option>
+                <option value="Crusader">Crusader</option>
+                <option value="Juggernaut">Juggernaut</option>
+                <option value="Outlaw">Outlaw</option>
+                <option value="Serial Killer">Serial Killer</option>
+                <option value="Vampire">Vampire</option>
+                <option value="Werewolf">Werewolf</option>
+                <option value="Fugitive">Fugitive</option>
+                <option value="Hitman">Hitman</option>
+                <option value="Plaguebearer">Plaguebearer</option>
+                <option value="Pirate">Pirate (HOME ROLE)</option>
+            </select>
+
+            <button class="button" onclick="replaceRole()">Add Selected Role</button>
+        </div>
+
+        <button class="button" onclick="generateRole()">Generate Will</button>
+        <button class="button" onclick="copyOutput()">Copy Output</button>
+
+        <div id="result"></div>
+        <div id="selected-role"></div>
     </div>
-
-    <button class="button" onclick="generateRole()">Generate Will</button>
-
-    <div id="result"></div>
-    <div id="selected-role"></div>
 
     <script>
         const homeRoles = [
@@ -133,7 +215,7 @@
             "Distractor", "Executive", "Medium", 
             "Retributionist", "Therapist", "Blackmailer", 
             "Forger", "Janitor", "Extortionist", "Puppeteer", 
-            "Amnesiac", "Survivor", "Pirate"
+            "Amnesiac", "Survivor", "Pirate", "Spy"
         ];
 
         const townRoles = [
@@ -214,6 +296,16 @@
 
             // Output the result
             document.getElementById("result").innerText = `${playerNumber} ${roleType} is ${formattedRoles}!`;
+        }
+
+        // Function to copy the output to the clipboard
+        function copyOutput() {
+            const outputText = document.getElementById("result").innerText;
+            navigator.clipboard.writeText(outputText).then(() => {
+                alert('Output copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy: ', err);
+            });
         }
     </script>
 </body>
